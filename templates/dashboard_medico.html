@@ -1,13 +1,251 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medico</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Médico</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
-    
-    <h1>Medico</h1>
+<body class="dash-body">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span class="logo-text">Clínica <em>Integral</em></span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active">
+        <span class="nav-icon">📋</span> Mi agenda
+      </a>
+      <a href="#" class="nav-item">
+        <span class="nav-icon">📁</span> Historias clínicas
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="user-avatar">M</div>
+        <div class="user-info">
+          <span class="user-name">{{ session.get('nombre', 'Dr. García') }}</span>
+          <span class="user-role">Médico · Consultorio N° 3</span>
+        </div>
+      </div>
+      <a href="{{ url_for('auth.logout') }}" class="btn-logout">Cerrar sesión</a>
+    </div>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="dash-content">
+  <main class="dash-main">
+
+    <!-- TOP BAR -->
+    <div class="dash-topbar">
+      <div>
+        <h1 class="dash-title">Mi agenda del día</h1>
+        <p class="dash-subtitle">Lunes 29 de junio de 2026 · Consultorio N° 3</p>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <span class="stat-number">8</span>
+        <span class="stat-label">Turnos totales</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number stat-green">4</span>
+        <span class="stat-label">Atendidos</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number stat-yellow">3</span>
+        <span class="stat-label">Pendientes</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number stat-red">1</span>
+        <span class="stat-label">Ausentes</span>
+      </div>
+    </div>
+
+    <!-- AGENDA GRID -->
+    <div class="agenda-grid">
+
+      <!-- LISTA DE TURNOS -->
+      <div class="table-card">
+        <div class="table-header">
+          <h2 class="table-title">Turnos de hoy</h2>
+          <div class="table-filters">
+            <input type="text" class="filter-input" placeholder="Buscar por nombre o DNI...">
+          </div>
+        </div>
+
+        <div class="turno-list">
+
+          <!-- Turno activo / próximo -->
+          <div class="turno-card-medico turno-activo">
+            <div class="turno-hora-col">
+              <span class="turno-hora-num">09:00</span>
+              <span class="turno-hora-label">hs</span>
+            </div>
+            <div class="turno-sep"></div>
+            <div class="turno-info">
+              <span class="turno-paciente-nombre">Juan Pérez</span>
+              <span class="turno-motivo-texto">Control general</span>
+              <div class="turno-meta">
+                <span class="estado-badge estado-pendiente">Pendiente</span>
+                <span class="consultorio-badge">N° 3</span>
+              </div>
+            </div>
+            <div class="turno-actions">
+              <a href="#" class="btn-ficha">Ver ficha</a>
+              <button class="btn-finalizar">Finalizar consulta</button>
+            </div>
+          </div>
+
+          <div class="turno-card-medico">
+            <div class="turno-hora-col">
+              <span class="turno-hora-num">09:30</span>
+              <span class="turno-hora-label">hs</span>
+            </div>
+            <div class="turno-sep"></div>
+            <div class="turno-info">
+              <span class="turno-paciente-nombre">Carlos Ruiz</span>
+              <span class="turno-motivo-texto">Seguimiento post-operatorio</span>
+              <div class="turno-meta">
+                <span class="estado-badge estado-pendiente">Pendiente</span>
+                <span class="consultorio-badge">N° 3</span>
+              </div>
+            </div>
+            <div class="turno-actions">
+              <a href="#" class="btn-ficha">Ver ficha</a>
+              <button class="btn-finalizar">Finalizar consulta</button>
+            </div>
+          </div>
+
+          <div class="turno-card-medico">
+            <div class="turno-hora-col">
+              <span class="turno-hora-num">10:00</span>
+              <span class="turno-hora-label">hs</span>
+            </div>
+            <div class="turno-sep"></div>
+            <div class="turno-info">
+              <span class="turno-paciente-nombre">Roberto Sánchez</span>
+              <span class="turno-motivo-texto">Primera consulta</span>
+              <div class="turno-meta">
+                <span class="estado-badge estado-pendiente">Pendiente</span>
+                <span class="consultorio-badge">N° 3</span>
+              </div>
+            </div>
+            <div class="turno-actions">
+              <a href="#" class="btn-ficha">Ver ficha</a>
+              <button class="btn-finalizar">Finalizar consulta</button>
+            </div>
+          </div>
+
+          <!-- Turno atendido -->
+          <div class="turno-card-medico" style="opacity:.7;">
+            <div class="turno-hora-col">
+              <span class="turno-hora-num">08:00</span>
+              <span class="turno-hora-label">hs</span>
+            </div>
+            <div class="turno-sep"></div>
+            <div class="turno-info">
+              <span class="turno-paciente-nombre">Ana Torres</span>
+              <span class="turno-motivo-texto">Dolor de cabeza</span>
+              <div class="turno-meta">
+                <span class="estado-badge estado-atendido">Atendido</span>
+                <span class="consultorio-badge">N° 3</span>
+              </div>
+            </div>
+            <div class="turno-actions">
+              <a href="#" class="btn-ficha">Ver ficha</a>
+            </div>
+          </div>
+
+          <!-- Turno ausente -->
+          <div class="turno-card-medico" style="opacity:.6;">
+            <div class="turno-hora-col">
+              <span class="turno-hora-num">08:30</span>
+              <span class="turno-hora-label">hs</span>
+            </div>
+            <div class="turno-sep"></div>
+            <div class="turno-info">
+              <span class="turno-paciente-nombre">Lucía Gómez</span>
+              <span class="turno-motivo-texto">Revisión de análisis</span>
+              <div class="turno-meta">
+                <span class="estado-badge estado-ausente">Ausente</span>
+                <span class="consultorio-badge">N° 3</span>
+              </div>
+            </div>
+            <div class="turno-actions">—</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PANEL LATERAL -->
+      <div class="panel-lateral">
+
+        <!-- Próximos turnos del día -->
+        <div class="panel-card">
+          <h3 class="panel-card-title">Próximos turnos</h3>
+          <div class="proximos-list">
+            <div class="proximo-item">
+              <span class="proximo-hora">09:00</span>
+              <div class="proximo-info">
+                <div class="proximo-nombre">Juan Pérez</div>
+                <div class="proximo-motivo">Control general</div>
+              </div>
+              <span class="estado-badge estado-pendiente">Ahora</span>
+            </div>
+            <div class="proximo-item">
+              <span class="proximo-hora">09:30</span>
+              <div class="proximo-info">
+                <div class="proximo-nombre">Carlos Ruiz</div>
+                <div class="proximo-motivo">Seguimiento</div>
+              </div>
+            </div>
+            <div class="proximo-item">
+              <span class="proximo-hora">10:00</span>
+              <div class="proximo-info">
+                <div class="proximo-nombre">Roberto Sánchez</div>
+                <div class="proximo-motivo">Primera consulta</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resumen del día -->
+        <div class="panel-card">
+          <h3 class="panel-card-title">Resumen del día</h3>
+          <div class="panel-stat-row">
+            <div class="panel-stat">
+              <span class="panel-stat-num green">4</span>
+              <span class="panel-stat-label">Atendidos</span>
+            </div>
+            <div class="panel-stat">
+              <span class="panel-stat-num yellow">3</span>
+              <span class="panel-stat-label">Pendientes</span>
+            </div>
+            <div class="panel-stat">
+              <span class="panel-stat-num red">1</span>
+              <span class="panel-stat-label">Ausentes</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-logo">Clínica <em>Integral</em></span>
+      <p>Sistema de Gestión Clínica Integral — <span>SGCI</span> © 2026</p>
+    </div>
+  </footer>
+
+  </div>
 
 </body>
 </html>

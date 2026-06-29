@@ -1,0 +1,13 @@
+# Entornos virtuales (¡nunca se suben!)
+venv/
+env/
+Lib/
+Scripts/
+
+# Caché de Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Archivos de variables de entorno (contraseñas, secret keys)
+.env

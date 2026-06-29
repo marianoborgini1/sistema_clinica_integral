@@ -10,122 +10,109 @@
 
 <!-- HEADER -->
 <header>
-    <div class="header-inner">
+  <div class="header-inner">
     <a class="logo" href="#">
-        <span class="logo-text">Clínica <em>Integral</em></span>
+      <span class="logo-text">Clínica <em>Integral</em></span>
     </a>
     <a class="btn-login" href="{{ url_for('auth.login') }}">Iniciar sesión</a>
-    </div>
+  </div>
 </header>
 
 <!-- HERO -->
 <section class="hero">
-    <span class="hero-eyebrow">Sistema de Gestión Clínica</span>
-    <h1>La clínica <em>organizada</em>,<br>de principio a fin</h1>
-    <p>Gestioná turnos, historias clínicas y la sala de espera desde un solo lugar. Sin papeles, sin demoras.</p>
-    <div class="hero-actions">
-    <a class="btn-primary" href="{{ url_for('auth.login') }}">
-        → Ingresar al sistema
-    </a>
+  <span class="hero-eyebrow">Sistema de Gestión Clínica</span>
+  <h1>La clínica <em>organizada</em>,<br>de principio a fin</h1>
+  <p>Gestioná turnos, historias clínicas y la sala de espera desde un solo lugar.</p>
+  <div class="hero-actions">
+    <a class="btn-primary" href="{{ url_for('auth.login') }}">→ Ingresar al sistema</a>
     <a class="btn-secondary" href="#funciones">Ver funciones</a>
-    </div>
+  </div>
 </section>
 
 <!-- FUNCIONES -->
 <section class="features" id="funciones">
-    <div class="section-label">Funcionalidades</div>
-    <h2 class="section-title">Todo lo que necesita una clínica moderna</h2>
-
-    <div class="cards-grid">
-
+  <div class="section-label">Funcionalidades</div>
+  <h2 class="section-title">Todo lo que necesita una clínica moderna</h2>
+  <div class="cards-grid">
     <div class="feature-card">
-        <div class="card-icon">📋</div>
-        <h3>Gestión de turnos</h3>
-        <p>Asigná turnos por fecha, hora y médico disponible. Los sobreturnos aparecen automáticamente en la pantalla de sala.</p>
+      <div class="card-icon">📋</div>
+      <h3>Gestión de turnos</h3>
+      <p>Asigná turnos por fecha, hora y médico disponible. Los sobreturnos aparecen automáticamente en la pantalla de sala.</p>
     </div>
-
     <div class="feature-card">
-        <div class="card-icon">🖥</div>
-        <h3>Pantalla de sala</h3>
-        <p>Los pacientes ven su turno en tiempo real. La cola avanza sola cuando el médico finaliza cada consulta.</p>
+      <div class="card-icon">🖥</div>
+      <h3>Pantalla de sala</h3>
+      <p>Los pacientes ven su turno en tiempo real. La cola avanza sola cuando el médico finaliza cada consulta.</p>
     </div>
-
     <div class="feature-card">
-        <div class="card-icon">📁</div>
-        <h3>Historia clínica digital</h3>
-        <p>Cada consulta queda registrada con síntomas y diagnóstico. El paciente puede descargarla en PDF cuando quiera.</p>
+      <div class="card-icon">📁</div>
+      <h3>Historia clínica digital</h3>
+      <p>Cada consulta queda registrada con síntomas y diagnóstico. El paciente puede descargarla en PDF cuando quiera.</p>
     </div>
-
     <div class="feature-card">
-        <div class="card-icon">👤</div>
-        <h3>Registro automático</h3>
-        <p>La recepcionista registra al paciente y el sistema le genera una cuenta y le envía las credenciales por email.</p>
+      <div class="card-icon">👤</div>
+      <h3>Registro automático</h3>
+      <p>La recepcionista registra al paciente y el sistema le genera una cuenta y le envía las credenciales por email.</p>
     </div>
-
     <div class="feature-card">
-        <div class="card-icon">🔒</div>
-        <h3>Acceso por roles</h3>
-        <p>Cada usuario ve solo lo que le corresponde. Recepcionista, médico y paciente tienen paneles separados y seguros.</p>
+      <div class="card-icon">🔒</div>
+      <h3>Acceso por roles</h3>
+      <p>Cada usuario ve solo lo que le corresponde. Recepcionista, médico y paciente tienen paneles separados y seguros.</p>
     </div>
-
     <div class="feature-card">
-        <div class="card-icon">📊</div>
-        <h3>Control de presentismo</h3>
-        <p>Marcá ausentes sin perder el registro. El historial de asistencia queda guardado en la base de datos.</p>
+      <div class="card-icon">📊</div>
+      <h3>Control de presentismo</h3>
+      <p>Marcá ausentes sin perder el registro. El historial de asistencia queda guardado en la base de datos.</p>
     </div>
-
-    </div>
+  </div>
 </section>
 
 <!-- ROLES -->
 <section class="roles" id="roles">
-    <div class="roles-inner">
+  <div class="roles-inner">
     <div class="section-label">Perfiles de usuario</div>
     <h2 class="section-title">Un sistema, tres roles distintos</h2>
-
     <div class="roles-grid">
-
-        <div class="role-card">
+      <div class="role-card">
         <span class="role-tag">Recepcionista</span>
         <h3>Centro de operaciones</h3>
         <ul class="role-list">
-            <li>Registrar pacientes nuevos</li>
-            <li>Asignar y gestionar turnos</li>
-            <li>Controlar la pantalla de sala</li>
-            <li>Marcar ausentes y sobreturnos</li>
+          <li>Registrar pacientes nuevos</li>
+          <li>Asignar y gestionar turnos</li>
+          <li>Controlar la pantalla de sala</li>
+          <li>Marcar ausentes y sobreturnos</li>
         </ul>
+      </div>
+      <div class="role-card">
+        <span class="role-tag">Médico</span>
+        <h3>Foco en el paciente</h3>
+        <ul class="role-list">
+          <li>Ver su agenda del día</li>
+          <li>Completar fichas médicas</li>
+          <li>Finalizar consultas</li>
+          <li>Acceder al historial de sus pacientes</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <span class="role-tag">Paciente</span>
+        <h3>Acceso a su salud</h3>
+        <ul class="role-list">
+          <li>Ver sus turnos asignados</li>
+          <li>Consultar su historia clínica</li>
+          <li>Descargar diagnósticos en PDF</li>
+          <li>Actualizar sus datos personales</li>
+        </ul>
+      </div>
     </div>
-
-        <div class="role-card">
-          <span class="role-tag">Médico</span>
-          <h3>Foco en el paciente</h3>
-          <ul class="role-list">
-            <li>Ver su agenda del día</li>
-            <li>Completar fichas médicas</li>
-            <li>Finalizar consultas</li>
-            <li>Acceder al historial de sus pacientes</li>
-          </ul>
-        </div>
-
-        <div class="role-card">
-          <span class="role-tag">Paciente</span>
-          <h3>Acceso a su salud</h3>
-          <ul class="role-list">
-            <li>Ver sus turnos asignados</li>
-            <li>Consultar su historia clínica</li>
-            <li>Descargar diagnósticos en PDF</li>
-            <li>Actualizar sus datos personales</li>
-          </ul>
-        </div>
-
-    </div>
-    </div>
+  </div>
 </section>
-
 
 <!-- FOOTER -->
 <footer>
-    <p>Sistema de Gestión Clínica Integral — <span>SGCI</span> © 2025</p>
+  <div class="footer-inner">
+    <span class="footer-logo">Clínica <em>Integral</em></span>
+    <p>Sistema de Gestión Clínica Integral — <span>SGCI</span> © 2026</p>
+  </div>
 </footer>
 
 </body>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrar Paciente — SGCI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="dash-body">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span class="logo-text">Clínica <em>Integral</em></span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="{{ url_for('recepcionista.dashboard') }}" class="nav-item">
+        <span class="nav-icon">📋</span> Turnos del día
+      </a>
+      <a href="{{ url_for('recepcionista.register_paciente') }}" class="nav-item active">
+        <span class="nav-icon">👤</span> Registrar paciente
+      </a>
+      <a href="#" class="nav-item">
+        <span class="nav-icon">🖥</span> Pantalla de sala
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="user-avatar">R</div>
+        <div class="user-info">
+          <span class="user-name">{{ session.get('nombre', 'Recepcionista') }}</span>
+          <span class="user-role">Recepcionista</span>
+        </div>
+      </div>
+      <a href="{{ url_for('auth.logout') }}" class="btn-logout">Cerrar sesión</a>
+    </div>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="dash-content">
+  <main class="dash-main">
+
+    <!-- TOP BAR -->
+    <div class="dash-topbar">
+      <div>
+        <h1 class="dash-title">Registrar paciente</h1>
+        <p class="dash-subtitle">El sistema generará una cuenta y enviará las credenciales por email.</p>
+      </div>
+      <a href="{{ url_for('recepcionista.dashboard') }}" class="btn-volver">← Volver a turnos</a>
+    </div>
+
+    <!-- AVISO -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dash">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <!-- FORM CARD -->
+    <div class="reg-card">
+
+      <form method="POST" action="{{ url_for('recepcionista.register_paciente') }}" class="reg-form">
+
+        <!-- SECCIÓN: Datos personales -->
+        <div class="reg-section">
+          <div class="reg-section-title">
+            <span class="reg-section-icon">👤</span>
+            <h2>Datos personales</h2>
+          </div>
+
+          <div class="reg-grid">
+            <div class="form-group">
+              <label class="form-label" for="nombre">Nombre</label>
+              <input class="form-input" type="text" id="nombre" name="nombre"
+                    placeholder="Ej: Juan" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="apellido">Apellido</label>
+              <input class="form-input" type="text" id="apellido" name="apellido"
+                    placeholder="Ej: Pérez" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="dni">DNI</label>
+              <input class="form-input" type="text" id="dni" name="dni"
+                    placeholder="Ej: 40123456" required>
+              <span class="form-hint">El sistema validará que el DNI no exista.</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="telefono">Teléfono</label>
+              <input class="form-input" type="text" id="telefono" name="telefono"
+                    placeholder="Ej: 2216370700" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="reg-divider"></div>
+
+        <!-- SECCIÓN: Cuenta y acceso -->
+        <div class="reg-section">
+          <div class="reg-section-title">
+            <span class="reg-section-icon">🔐</span>
+            <h2>Cuenta y acceso</h2>
+          </div>
+
+          <div class="reg-grid">
+            <div class="form-group">
+              <label class="form-label" for="email">Email</label>
+              <input class="form-input" type="email" id="email" name="email"
+                    placeholder="paciente@email.com" required>
+              <span class="form-hint">Las credenciales se enviarán a este email.</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="nombre_usuario">Nombre de usuario</label>
+              <input class="form-input" type="text" id="nombre_usuario" name="nombre_usuario"
+                    placeholder="Ej: juan_perez" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="reg-divider"></div>
+
+        <!-- SECCIÓN: Datos médicos -->
+        <div class="reg-section">
+          <div class="reg-section-title">
+            <span class="reg-section-icon">🏥</span>
+            <h2>Datos médicos</h2>
+          </div>
+
+          <div class="reg-grid">
+            <div class="form-group">
+              <label class="form-label" for="obra_social">Obra social</label>
+              <input class="form-input" type="text" id="obra_social" name="obra_social"
+                    placeholder="Ej: OSDE, IOMA, Particular">
+            </div>
+          </div>
+        </div>
+
+        <!-- ACCIONES -->
+        <div class="reg-actions">
+          <a href="{{ url_for('recepcionista.dashboard') }}" class="btn-cancelar">Cancelar</a>
+          <button type="submit" class="btn-primary">
+            Registrar paciente →
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-logo">Clínica <em>Integral</em></span>
+      <p>Sistema de Gestión Clínica Integral — <span>SGCI</span> © 2026</p>
+    </div>
+  </footer>
+
+  </div>
+
+</body>
+</html>

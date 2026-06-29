@@ -1,13 +1,198 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recepcionista</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Recepcionista</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
+<body class="dash-body">
 
-    <h1>Recepcionista</h1>
-    
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span class="logo-text">Clínica <em>Integral</em></span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active">
+        <span class="nav-icon">📋</span> Turnos del día
+      </a>
+      <a href="{{ url_for('recepcionista.register_paciente') }}" class="nav-item">
+        <span class="nav-icon">👤</span> Registrar paciente
+      </a>
+      <a href="#" class="nav-item">
+        <span class="nav-icon">🖥</span> Pantalla de sala
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="user-avatar">R</div>
+        <div class="user-info">
+          <span class="user-name">{{ session.get('nombre', 'Recepcionista') }}</span>
+          <span class="user-role">Recepcionista</span>
+        </div>
+      </div>
+      <a href="{{ url_for('auth.logout') }}" class="btn-logout">Cerrar sesión</a>
+    </div>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="dash-content">
+
+  <!-- MAIN -->
+  <main class="dash-main">
+
+    <!-- TOP BAR -->
+    <div class="dash-topbar">
+      <div>
+        <h1 class="dash-title">Turnos del día</h1>
+        <p class="dash-subtitle">Lunes 29 de junio de 2026</p>
+      </div>
+      <a href="#" class="btn-primary btn-sm">+ Nuevo turno</a>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <span class="stat-number">12</span>
+        <span class="stat-label">Turnos totales</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number stat-green">7</span>
+        <span class="stat-label">Atendidos</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number stat-yellow">3</span>
+        <span class="stat-label">Pendientes</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number stat-red">2</span>
+        <span class="stat-label">Ausentes</span>
+      </div>
+    </div>
+
+    <!-- TABLA TURNOS -->
+    <div class="table-card">
+      <div class="table-header">
+        <h2 class="table-title">Lista de turnos</h2>
+        <div class="table-filters">
+          <input type="text" class="filter-input" placeholder="Buscar por DNI o nombre...">
+          <select class="filter-select">
+            <option>Todos los médicos</option>
+            <option>Dr. García</option>
+            <option>Dra. Martínez</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="turnos-table">
+          <thead>
+            <tr>
+              <th>Hora</th>
+              <th>Paciente</th>
+              <th>DNI</th>
+              <th>Médico</th>
+              <th>Consultorio</th>
+              <th>Motivo</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Primer turno destacado -->
+            <tr class="row-next">
+              <td><span class="time-badge">09:00</span></td>
+              <td><strong>Juan Pérez</strong></td>
+              <td>40123456</td>
+              <td>Dr. García</td>
+              <td><span class="consultorio-badge">N° 3</span></td>
+              <td>Control general</td>
+              <td><span class="estado-badge estado-pendiente">Pendiente</span></td>
+              <td class="acciones">
+                <button class="btn-accion btn-ausente">Ausente</button>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="time-badge">09:30</span></td>
+              <td>María López</td>
+              <td>38456789</td>
+              <td>Dra. Martínez</td>
+              <td><span class="consultorio-badge">N° 1</span></td>
+              <td>Dolor de cabeza</td>
+              <td><span class="estado-badge estado-pendiente">Pendiente</span></td>
+              <td class="acciones">
+                <button class="btn-accion btn-ausente">Ausente</button>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="time-badge">08:00</span></td>
+              <td>Carlos Ruiz</td>
+              <td>35789012</td>
+              <td>Dr. García</td>
+              <td><span class="consultorio-badge">N° 3</span></td>
+              <td>Seguimiento</td>
+              <td><span class="estado-badge estado-atendido">Atendido</span></td>
+              <td class="acciones">—</td>
+            </tr>
+            <tr>
+              <td><span class="time-badge">08:30</span></td>
+              <td>Ana Torres</td>
+              <td>42001234</td>
+              <td>Dra. Martínez</td>
+              <td><span class="consultorio-badge">N° 1</span></td>
+              <td>Primera consulta</td>
+              <td><span class="estado-badge estado-ausente">Ausente</span></td>
+              <td class="acciones">—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SOBRETURNO -->
+    <div class="sobreturno-card">
+      <div class="sobreturno-header">
+        <h2 class="table-title">Agregar sobreturno</h2>
+        <p class="sobreturno-desc">Se mostrará automáticamente en la pantalla de sala en orden cronológico.</p>
+      </div>
+      <form class="sobreturno-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Paciente (DNI)</label>
+            <input class="form-input" type="text" placeholder="Ingresá el DNI">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Médico</label>
+            <select class="form-input">
+              <option>Dr. García</option>
+              <option>Dra. Martínez</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Hora</label>
+            <input class="form-input" type="time">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Motivo</label>
+            <input class="form-input" type="text" placeholder="Motivo de consulta">
+          </div>
+        </div>
+        <button type="submit" class="btn-primary btn-sm">Agregar sobreturno</button>
+      </form>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-logo">Clínica <em>Integral</em></span>
+      <p>Sistema de Gestión Clínica Integral — <span>SGCI</span> © 2026</p>
+    </div>
+  </footer>
+
+  </div>
+
 </body>
 </html>

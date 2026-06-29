@@ -1,13 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar sesión — SGCI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
-    
-    <h1>Login</h1>
+<body class="login-body">
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <a class="logo" href="{{ url_for('index') }}">
+        <span class="logo-text">Clínica <em>Integral</em></span>
+      </a>
+    </div>
+  </header>
+
+  <!-- LOGIN -->
+  <main class="login-main">
+    <div class="login-card">
+
+      <div class="login-top">
+        <h1>Iniciar sesión</h1>
+        <p>Ingresá con tu cuenta para continuar</p>
+      </div>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <form method="POST" action="{{ url_for('auth.login') }}" class="login-form">
+
+        <div class="form-group">
+          <label class="form-label" for="email">Email</label>
+          <input
+            class="form-input"
+            type="email"
+            id="email"
+            name="email"
+            placeholder="tu@email.com"
+            required
+            autocomplete="email"
+          >
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="contrasena">Contraseña</label>
+          <div class="input-wrapper">
+            <input
+              class="form-input"
+              type="password"
+              id="contrasena"
+              name="contrasena"
+              placeholder="••••••••"
+              required
+              autocomplete="current-password"
+            >
+            <button type="button" class="toggle-pass" onclick="togglePass()">
+              <span id="eye-icon">👁</span>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit">Ingresar al sistema →</button>
+
+      </form>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-logo">Clínica <em>Integral</em></span>
+      <p>Sistema de Gestión Clínica Integral — <span>SGCI</span> © 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    function togglePass() {
+      const input = document.getElementById('contrasena');
+      const icon  = document.getElementById('eye-icon');
+      input.type = input.type === 'password' ? 'text' : 'password';
+      icon.textContent = input.type === 'password' ? '👁' : '✕';
+    }
+  </script>
 
 </body>
 </html>
